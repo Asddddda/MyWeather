@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="25dp"
+    android:layout_marginRight="25dp">
+<!--    地点的item_view-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:id="@+id/loc_name"
+        android:text="渝北"
+        android:textColor="@color/colorPureWhiteText"
+        android:textSize="21sp"
+        android:layout_gravity="left"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="重庆市，中国"
+        android:textSize="14sp"
+        android:textColor="#918F8F"
+        android:id="@+id/parent_loc"
+        android:layout_marginBottom="5dp"/>
+
+</LinearLayout>

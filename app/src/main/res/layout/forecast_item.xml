@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/date_text"
+        android:textSize="15sp"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:textColor="#fff"/>
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/forecast_imagine_d"
+        android:layout_weight="0.9"/>
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="20sp"
+        android:background="@drawable/divide_dark"
+        android:layout_gravity="center"
+        android:layout_weight="0.4"/>
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/forecast_imagine_n"
+        android:layout_gravity="left"
+        android:layout_weight="0.9"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="0.5" />
+
+    <ImageView
+        android:layout_width="21dp"
+        android:layout_height="25dp"
+        android:background="@drawable/shuidi"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="left"
+        android:textColor="#fff"
+        android:id="@+id/rain_per_text"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:id="@+id/tem_text"
+        android:gravity="center"
+        android:textColor="#fff"/>
+
+</LinearLayout>

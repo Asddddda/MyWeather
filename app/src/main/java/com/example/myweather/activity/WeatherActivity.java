@@ -229,7 +229,7 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
      */
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode,resultCode,intent);
-        if(requestCode==ALBUM_REQUEST_CODE)   //调用相册后返回
+        if(requestCode == ALBUM_REQUEST_CODE)   //调用相册后返回
             if (resultCode == RESULT_OK) {
                 //uri转path
                 Uri uri = intent.getData();

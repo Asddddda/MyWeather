@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.example.myweather.locationView.Location;
+import com.example.myweather.LocationView.Location;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -7,14 +7,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import com.example.myweather.locationView.LocationAdapter;
+import com.example.myweather.LocationView.LocationAdapter;
 
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.widget.EditText;
-import com.example.myweather.locationView.Location;
+import com.example.myweather.LocationView.Location;
 import com.example.myweather.R;
 import com.example.myweather.method.JsonObject;
 import java.util.ArrayList;

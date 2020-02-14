@@ -1,4 +1,4 @@
-package com.example.myweather.locationView;
+package com.example.myweather.LocationView;
 
 import android.content.Context;
 import android.content.Intent;

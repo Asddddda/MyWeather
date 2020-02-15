@@ -4,6 +4,11 @@
    能显示当天的天气数据,如温度,pm2.5,aqi等,也能预报未来24h内每3h的天气变化,也能显示7天内每天的天气变化.
    支持搜索指定地点,也能使用定位获取当前地点,还支持自定义背景图片.
    ![image](https://github.com/Asddddda/MyWeather/blob/master/使用演示.gif)
+   ![image](https://github.com/Asddddda/MyWeather/blob/master/Screenshot_20200214-205918.jpg)
+   ![image](https://github.com/Asddddda/MyWeather/blob/master/Screenshot_20200214-205924.jpg)
+   ![image](https://github.com/Asddddda/MyWeather/blob/master/Screenshot_20200214-205848.jpg)
+   ![image](https://github.com/Asddddda/MyWeather/blob/master/Screenshot_20200214-205903.jpg)
+   ![image](https://github.com/Asddddda/MyWeather/blob/master/Screenshot_20200214-205950.jpg)
   
 技术及知识点:
    JSONObject解析请求得到的数据,SharedPreference用于数据储存.

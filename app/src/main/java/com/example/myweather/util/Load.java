@@ -1,4 +1,4 @@
-package com.example.myweather.method;
+package com.example.myweather.util;
 
 import android.app.Activity;
 import android.content.Context;
@@ -14,7 +14,6 @@ import com.example.myweather.R;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class Load {
 

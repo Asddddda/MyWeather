@@ -16,13 +16,13 @@ import android.view.View;
 import android.widget.EditText;
 import com.example.myweather.locationView.Location;
 import com.example.myweather.R;
-import com.example.myweather.method.JsonObject;
-import com.example.myweather.method.ThreadManager;
+import com.example.myweather.util.JsonObject;
+import com.example.myweather.util.ThreadManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.myweather.method.Load.makeStatusBarTransparent;
+import static com.example.myweather.util.Load.makeStatusBarTransparent;
 
 public class LocationResultActivity extends AppCompatActivity implements View.OnClickListener {
 

@@ -15,7 +15,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -31,8 +30,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.myweather.R;
-import com.example.myweather.method.Load;
-import com.example.myweather.method.ThreadManager;
+import com.example.myweather.util.Load;
+import com.example.myweather.util.ThreadManager;
 import com.example.myweather.service.UpdateService;
 
 import java.io.File;
@@ -41,7 +40,7 @@ import java.io.FileNotFoundException;
 import java.util.concurrent.ExecutorService;
 
 
-import static com.example.myweather.method.Load.makeStatusBarTransparent;
+import static com.example.myweather.util.Load.makeStatusBarTransparent;
 
 public class WeatherActivity extends AppCompatActivity implements View.OnClickListener{
     private ThreadManager manager = new ThreadManager();

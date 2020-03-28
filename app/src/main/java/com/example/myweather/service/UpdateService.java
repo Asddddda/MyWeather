@@ -7,11 +7,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.os.SystemClock;
-import android.util.Log;
-import android.widget.Toast;
 
-import com.example.myweather.method.Load;
-import com.example.myweather.method.ThreadManager;
+import com.example.myweather.util.Load;
+import com.example.myweather.util.ThreadManager;
 
 public class UpdateService extends Service {
     private ThreadManager manager = new ThreadManager();

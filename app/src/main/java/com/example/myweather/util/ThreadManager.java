@@ -1,6 +1,5 @@
-package com.example.myweather.method;
+package com.example.myweather.util;
 
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 

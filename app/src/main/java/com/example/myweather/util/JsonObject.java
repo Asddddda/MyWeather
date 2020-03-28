@@ -1,4 +1,4 @@
-package com.example.myweather.method;
+package com.example.myweather.util;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

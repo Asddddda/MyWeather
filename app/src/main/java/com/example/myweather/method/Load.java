@@ -20,7 +20,7 @@ public class Load {
 
     private Context mainContext;
 
-    private ExecutorService executorService;
+    private ExecutorService executorService;//这个是由单例得到的
 
     public Load(Context mainContext,ExecutorService executorService){
         this.mainContext = mainContext;

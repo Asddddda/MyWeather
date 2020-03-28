@@ -28,7 +28,7 @@ public class UpdateService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         update();
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        int minute = 1000 * 10;
+        int minute = 1000 * 60 * 60 * 6;
         long triggerAtTime = SystemClock.elapsedRealtime() + minute;
         Intent currentIntent = new Intent(this,UpdateService.class);
         PendingIntent updateIntent = PendingIntent.getService(this,0,currentIntent,0);
@@ -45,6 +45,6 @@ public class UpdateService extends Service {
         SharedPreferences sp = getSharedPreferences("Weather",MODE_PRIVATE);
         Load load = new Load(this,manager.getExecutorService());
         load.loadOnline(sp.getString("adress","auto_ip"));
-        Toast.makeText(this,"Updating...",Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this,"Updating...",Toast.LENGTH_SHORT).show();
     }
 }

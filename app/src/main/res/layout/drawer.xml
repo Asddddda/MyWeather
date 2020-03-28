@@ -185,4 +185,32 @@
 
     </RelativeLayout>
 
+
+<!--后台更新-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:id="@+id/bac_update_view">
+
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="自动更新"
+            android:textColor="#fff"
+            android:textSize="16sp"/>
+
+
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:background="@drawable/choose"
+            android:layout_marginRight="20dp"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
 </LinearLayout>

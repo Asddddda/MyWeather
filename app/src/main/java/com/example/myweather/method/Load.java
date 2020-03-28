@@ -13,20 +13,25 @@ import com.example.myweather.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Load {
 
     private Context mainContext;
 
-    public Load(Context mainContext){
+    private ExecutorService executorService;
+
+    public Load(Context mainContext,ExecutorService executorService){
         this.mainContext = mainContext;
+        this.executorService = executorService;
     }
 
     /**
      * 网络加载
      */
     public void loadOnline(String adress){
-        JsonObject jsonObject = new JsonObject(mainContext);
+        JsonObject jsonObject = new JsonObject(mainContext,executorService);
         jsonObject.requestWeather("now",adress);
         jsonObject.requestWeather("lifestyle",adress);
         jsonObject.requestWeather("forecast",adress);

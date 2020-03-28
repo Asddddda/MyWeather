@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -31,14 +32,21 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.myweather.R;
 import com.example.myweather.method.Load;
+import com.example.myweather.method.ThreadManager;
+import com.example.myweather.service.UpdateService;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.concurrent.ExecutorService;
 
 
 import static com.example.myweather.method.Load.makeStatusBarTransparent;
 
 public class WeatherActivity extends AppCompatActivity implements View.OnClickListener{
+    private ThreadManager manager = new ThreadManager();
+
+    private ExecutorService executorService = manager.getExecutorService();
 
     private FrameLayout weatherLayoutAll;
 
@@ -125,6 +133,7 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
         swipeRefreshLayout = findViewById(R.id.swipe_view);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
         nowText = findViewById(R.id.now_text);
+        findViewById(R.id.bac_update_view).setOnClickListener(this);
         findViewById(R.id.locate_view).setOnClickListener(this);
         findViewById(R.id.search_view).setOnClickListener(this);
         findViewById(R.id.now_view).setOnClickListener(this);
@@ -156,9 +165,11 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                SharedPreferences.Editor editor = getSharedPreferences("Weather", MODE_PRIVATE).edit();
-                editor.putString("adress", "auto_ip");
-                editor.apply();
+                if(sp.getString("adress","").equals("")){
+                    SharedPreferences.Editor editor = getSharedPreferences("Weather", MODE_PRIVATE).edit();
+                    editor.putString("adress", "auto_ip");
+                    editor.apply();
+                }
                 adress = sp.getString("adress","");
                 loadMain(adress);
             }
@@ -170,6 +181,23 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
         super.onPause();
         if(!isLoading)
             finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SharedPreferences sp = getSharedPreferences("Weather",MODE_PRIVATE);
+        if (sp.getBoolean("backgroundUpdate",false)){
+            Intent startUpdateIntent = new Intent(this, UpdateService.class);
+            if(Build.VERSION.SDK_INT>=26) {//仅在26及以上有效
+                startForegroundService(startUpdateIntent);
+            } else {
+                startService(startUpdateIntent);
+            }
+        } else {
+            Intent stopUpdateIntent = new Intent(this, UpdateService.class);
+            stopService(stopUpdateIntent);
+        }
     }
 
     @Override
@@ -193,6 +221,18 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
                 drawerLayout.closeDrawer(GravityCompat.START);
                 Intent intent = new Intent(WeatherActivity.this, LocationResultActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.bac_update_view:
+                SharedPreferences sp = getSharedPreferences("Weather",MODE_PRIVATE);
+                if(!sp.getBoolean("backgroundUpdate",false)) {
+                    editor.putBoolean("backgroundUpdate",true);
+                    editor.apply();
+                    Toast.makeText(this,"开启成功",Toast.LENGTH_SHORT).show();
+                } else {
+                    editor.putBoolean("backgroundUpdate",false);
+                    editor.apply();
+                    Toast.makeText(this,"关闭成功",Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.change_view://自定义背景
                 isLoading = true;
@@ -321,7 +361,7 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
      * @param url 地址
      */
     public void loadMain(String url){
-        Load load = new Load(WeatherActivity.this);
+        Load load = new Load(this,executorService);
         load.loadOnline(url);
         //刷新后线上加载
         new Thread(new Runnable() {

@@ -1,10 +1,14 @@
 package com.example.myweather.method;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
+import android.widget.Toast;
 
-import com.example.myweather.LocationView.Location;
+import com.example.myweather.locationView.Location;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,8 +24,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.example.myweather.activity.WeatherActivity.UPDATE_TEXT;
 
 public class JsonObject{
 
@@ -29,11 +36,27 @@ public class JsonObject{
 
     private List<Location>mLocList;
 
-    public JsonObject(List<Location>locationList){ this.mLocList = locationList; }
+    private ExecutorService executorService;
 
-    public JsonObject(Context mainContext){
-        this.mainContext = mainContext;
+    public JsonObject(List<Location>locationList,ExecutorService executorService){
+        this.mLocList = locationList;
+        this.executorService = executorService;
     }
+
+    public JsonObject(Context mainContext,ExecutorService executorService){
+        this.mainContext = mainContext;
+        this.executorService = executorService;
+    }
+
+    @SuppressLint("HandlerLeak")
+    private Handler handler = new Handler(){
+
+        public void handleMessage(Message msg){
+            if(msg.what == UPDATE_TEXT) {
+                Toast.makeText(mainContext,"网络错误",Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
 
     /**
      * 请求数据
@@ -50,9 +73,10 @@ public class JsonObject{
                     +"&key=22ddaaff07e84ba1aa12c354d00cb476";
         else link = "https://free-api.heweather.net/s6/weather/" + method
                 +"?location=" + locId + "&key=22ddaaff07e84ba1aa12c354d00cb476";
-        new Thread(new Runnable() {
+        executorService.execute( new Thread(new Runnable() {
             @Override
             public void run() {
+                Log.d("!!!!!!",Thread.currentThread().getName());
                 HttpURLConnection connection = null;
                 BufferedReader reader = null;
                 try {
@@ -71,6 +95,11 @@ public class JsonObject{
                     }
                     parseJSONdata(method, response.toString());
                 } catch (Exception e) {
+                    if(!method.equals("find")) {
+                        Message message = new Message();
+                        message.what = UPDATE_TEXT;
+                        handler.sendMessage(message);
+                    }
                     e.printStackTrace();
                 } finally {
                     if (reader != null) {
@@ -85,7 +114,7 @@ public class JsonObject{
                     }
                 }
             }
-        }).start();
+        }) );
     }
 
 
@@ -131,7 +160,7 @@ public class JsonObject{
             JSONObject dataObject = rootArray.getJSONObject(0);
             String status = dataObject.getString("status");
             if(!status.equals("ok")){
-                Log.d("!!!!!!","网络错误");
+                Toast.makeText(mainContext,"网络错误",Toast.LENGTH_SHORT).show();
             }else{
                 JSONObject basic = dataObject.getJSONObject("basic");
                 JSONObject update = dataObject.getJSONObject("update");

@@ -28,7 +28,7 @@
             android:textColorHint="@color/colorGrayText"
             android:textColor="@color/colorPureWhiteText"
             android:id="@+id/search_edit_text"
-        android:maxLines="1"/>
+            android:maxLines="1"/>
 
         <ImageButton
             android:layout_marginTop="10dp"

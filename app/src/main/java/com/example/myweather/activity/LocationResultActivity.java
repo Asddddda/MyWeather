@@ -7,16 +7,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import com.example.myweather.LocationView.LocationAdapter;
+import com.example.myweather.locationView.LocationAdapter;
 
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.widget.EditText;
-import com.example.myweather.LocationView.Location;
+import com.example.myweather.locationView.Location;
 import com.example.myweather.R;
 import com.example.myweather.method.JsonObject;
+import com.example.myweather.method.ThreadManager;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,7 +70,7 @@ public class LocationResultActivity extends AppCompatActivity implements View.On
             case R.id.send_button:
                 mLocList.clear();
                 String loc = searchEdit.getText().toString();
-                JsonObject jsonObject = new JsonObject(mLocList);
+                JsonObject jsonObject = new JsonObject(mLocList,new ThreadManager().getExecutorService());
                 jsonObject.requestWeather("find", loc);
                 new Thread(new Runnable() {
                     @Override

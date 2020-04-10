@@ -71,6 +71,6 @@ public class UpdateService extends Service {
                 .setSmallIcon(R.mipmap.quin)
                 .setContentIntent(pi);
         manager.notify(1,builder.build());
-
+        
     }
 }

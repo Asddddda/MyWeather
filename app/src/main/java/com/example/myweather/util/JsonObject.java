@@ -8,7 +8,7 @@ import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.myweather.locationView.Location;
+import com.example.myweather.presenter.locationView.Location;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,7 +28,7 @@ import java.util.concurrent.ExecutorService;
 
 
 import static android.content.Context.MODE_PRIVATE;
-import static com.example.myweather.activity.WeatherActivity.UPDATE_TEXT;
+import static com.example.myweather.View.WeatherActivity.UPDATE_TEXT;
 
 public class JsonObject{
 
@@ -63,6 +63,7 @@ public class JsonObject{
      * @param method 请求类型
      * @param locId 请求地名（cid）
      */
+
     public void requestWeather(final String method, final String locId) {
         final String link;
         if(method.equals("air"))
@@ -96,7 +97,7 @@ public class JsonObject{
                     parseJSONdata(method, response.toString());
                 } catch (Exception e) {
                     if(!method.equals("find")) {
-                        Message message = new Message();
+                        Message message = Message.obtain();
                         message.what = UPDATE_TEXT;
                         handler.sendMessage(message);
                     }

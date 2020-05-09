@@ -1,9 +1,8 @@
-package com.example.myweather.locationView;
+package com.example.myweather.presenter.locationView;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myweather.R;
-import com.example.myweather.activity.WeatherActivity;
+import com.example.myweather.View.WeatherActivity;
 
 import java.util.List;
 

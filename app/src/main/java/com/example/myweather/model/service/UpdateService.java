@@ -1,8 +1,7 @@
-package com.example.myweather.service;
+package com.example.myweather.model.service;
 
 import android.app.AlarmManager;
 import android.app.NotificationChannel;
-import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -16,7 +15,7 @@ import android.os.SystemClock;
 import androidx.core.app.NotificationCompat;
 
 import com.example.myweather.R;
-import com.example.myweather.activity.WeatherActivity;
+import com.example.myweather.View.WeatherActivity;
 import com.example.myweather.util.Load;
 import com.example.myweather.util.ThreadManager;
 
@@ -34,7 +33,7 @@ public class UpdateService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         update();
-        notification();
+//        notification();//由于不能常驻后台，已停用
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         int minute = 1000 * 60 * 60 * 6;
         long triggerAtTime = SystemClock.elapsedRealtime() + minute;
@@ -57,7 +56,7 @@ public class UpdateService extends Service {
 
     void notification(){
         SharedPreferences sp = getSharedPreferences("Weather",MODE_PRIVATE);
-        NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        final NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.O){
             NotificationChannel channel1 = new NotificationChannel("1","defaultChannel",NotificationManager.IMPORTANCE_HIGH);
             manager.createNotificationChannel(channel1);
@@ -69,8 +68,8 @@ public class UpdateService extends Service {
                 .setContentTitle(sp.getString("temHourly0","")+"℃  "+sp.getString("info0",""))
                 .setContentText("别摸了,记得打卡")
                 .setSmallIcon(R.mipmap.quin)
-                .setContentIntent(pi);
+                .setContentIntent(pi)
+                .setAutoCancel(true);
         manager.notify(1,builder.build());
-        
     }
 }

@@ -1,4 +1,4 @@
-package com.example.myweather.activity;
+package com.example.myweather.View;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -24,15 +24,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.os.Handler;
 import android.os.Message;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.myweather.R;
+
 import com.example.myweather.util.Load;
 import com.example.myweather.util.ThreadManager;
-import com.example.myweather.service.UpdateService;
+import com.example.myweather.model.service.UpdateService;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -109,33 +111,9 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        makeStatusBarTransparent(WeatherActivity.this);
         setContentView(R.layout.activity_weather);
-        //初始化各控件
-        weatherLayoutAll = findViewById(R.id.weather_layout_all);
-        weatherLayout = findViewById(R.id.weather_layout);
-        titleLoc = findViewById(R.id.title_loc);
-        titleUpdateTime = findViewById(R.id.title_update_time);
-        degreeText = findViewById(R.id.degree_text);
-        weatherInfoText = findViewById(R.id.weather_info_text);
-        forecastLayout = findViewById(R.id.forecast_layout);
-        hourlyLayout = findViewById(R.id.hourly_layout);
-        aqiText = findViewById(R.id.aqi_text);
-        pm25Text = findViewById(R.id.pm25_text);
-        comfortText = findViewById(R.id.comfort_text);
-        carWashText = findViewById(R.id.car_wash_text);
-        sportText = findViewById(R.id.sport_text);
-        drawerLayout = findViewById(R.id.drawer_layout);
-        menuButton = findViewById(R.id.menu_button);
-        menuButton.setOnClickListener(this);
-        findViewById(R.id.change_view).setOnClickListener(this);
-        swipeRefreshLayout = findViewById(R.id.swipe_view);
-        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
-        nowText = findViewById(R.id.now_text);
-        findViewById(R.id.bac_update_view).setOnClickListener(this);
-        findViewById(R.id.locate_view).setOnClickListener(this);
-        findViewById(R.id.search_view).setOnClickListener(this);
-        findViewById(R.id.now_view).setOnClickListener(this);
+        initView();
+        initListener();
         final SharedPreferences sp = getSharedPreferences("Weather",MODE_PRIVATE);
         adress = sp.getString("adress","");
         //无数据则提示加载
@@ -174,6 +152,40 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
             }
         });
     }
+
+    public void initView() {
+        makeStatusBarTransparent(WeatherActivity.this);
+        //初始化各控件
+        weatherLayoutAll = findViewById(R.id.weather_layout_all);
+        weatherLayout = findViewById(R.id.weather_layout);
+        titleLoc = findViewById(R.id.title_loc);
+        titleUpdateTime = findViewById(R.id.title_update_time);
+        degreeText = findViewById(R.id.degree_text);
+        weatherInfoText = findViewById(R.id.weather_info_text);
+        forecastLayout = findViewById(R.id.forecast_layout);
+        hourlyLayout = findViewById(R.id.hourly_layout);
+        aqiText = findViewById(R.id.aqi_text);
+        pm25Text = findViewById(R.id.pm25_text);
+        comfortText = findViewById(R.id.comfort_text);
+        carWashText = findViewById(R.id.car_wash_text);
+        sportText = findViewById(R.id.sport_text);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        menuButton = findViewById(R.id.menu_button);
+        swipeRefreshLayout = findViewById(R.id.swipe_view);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
+        nowText = findViewById(R.id.now_text);
+
+    }
+
+    public void initListener() {
+        menuButton.setOnClickListener(this);
+        findViewById(R.id.change_view).setOnClickListener(this);
+        findViewById(R.id.bac_update_view).setOnClickListener(this);
+        findViewById(R.id.locate_view).setOnClickListener(this);
+        findViewById(R.id.search_view).setOnClickListener(this);
+        findViewById(R.id.now_view).setOnClickListener(this);
+    }
+
 
     @Override
     protected void onPause() {
@@ -368,7 +380,7 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
             public void run() {
                 try{
                     Thread.sleep(1000);
-                    Message message = new Message();
+                    Message message = Message.obtain();
                     message.what = UPDATE_TEXT;
                     handler.sendMessage(message);
                 }catch (InterruptedException e){

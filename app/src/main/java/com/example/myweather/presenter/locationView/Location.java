@@ -1,4 +1,4 @@
-package com.example.myweather.locationView;
+package com.example.myweather.presenter.locationView;
 
 public class Location {
 

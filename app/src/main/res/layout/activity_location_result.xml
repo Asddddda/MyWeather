@@ -23,6 +23,8 @@
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
+            android:imeOptions="actionDone"
+            android:inputType="text"
             android:background="@drawable/shape_search"
             android:hint="搜索"
             android:textColorHint="@color/colorGrayText"

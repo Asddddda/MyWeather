@@ -19,6 +19,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,7 +35,7 @@ import com.example.myweather.R;
 
 import com.example.myweather.util.Load;
 import com.example.myweather.util.ThreadManager;
-import com.example.myweather.model.service.UpdateService;
+import com.example.myweather.service.UpdateService;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -174,7 +175,6 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
         swipeRefreshLayout = findViewById(R.id.swipe_view);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
         nowText = findViewById(R.id.now_text);
-
     }
 
     public void initListener() {
@@ -184,6 +184,7 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
         findViewById(R.id.locate_view).setOnClickListener(this);
         findViewById(R.id.search_view).setOnClickListener(this);
         findViewById(R.id.now_view).setOnClickListener(this);
+        findViewById(R.id.media_demo).setOnClickListener(this);
     }
 
 
@@ -193,6 +194,7 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
         if(!isLoading)
             finish();
     }
+
 
     @Override
     protected void onDestroy() {
@@ -211,6 +213,7 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         SharedPreferences.Editor editor = getSharedPreferences("Weather", MODE_PRIVATE).edit();
@@ -268,6 +271,10 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
                 Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
                 photoPickerIntent.setType("image/*");
                 startActivityForResult(photoPickerIntent, ALBUM_REQUEST_CODE);
+                break;
+            case R.id.media_demo:
+                Intent videoIntent = new Intent(WeatherActivity.this,VideoPlayActivity.class);
+                startActivity(videoIntent);
                 break;
         }
     }

@@ -20,8 +20,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".View.VideoPlayActivity"></activity>
+
         <service
-            android:name=".model.service.UpdateService"
+            android:name=".service.UpdateService"
             android:enabled="true"
             android:exported="true" />
 

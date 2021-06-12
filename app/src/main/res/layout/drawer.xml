@@ -213,4 +213,48 @@
 
     </RelativeLayout>
 
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="实验区"
+            android:layout_marginLeft="35dp"
+            android:textColor="#6F6E6E"
+            android:textSize="12sp"/>
+    </LinearLayout>
+
+    <!--   壁纸-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:id="@+id/media_demo"
+        >
+
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="视频播放"
+            android:textColor="#fff"
+            android:textSize="16sp"/>
+
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/go"
+            android:layout_marginRight="20dp"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+
 </LinearLayout>

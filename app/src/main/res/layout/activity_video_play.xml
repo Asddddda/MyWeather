@@ -13,11 +13,11 @@
             android:layout_width="38dp"
             android:layout_marginTop="6dp"
             android:layout_height="38dp"
-            android:id="@+id/search_back_button"
+            android:id="@+id/video_back_button"
             android:background="@drawable/back_rot"/>
 
         <EditText
-            android:id="@+id/search_edit_text"
+            android:id="@+id/video_edit_text"
             android:layout_width="330dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -25,7 +25,7 @@
             android:layout_marginBottom="4dp"
             android:layout_weight="1"
             android:background="@drawable/shape_search"
-            android:hint="搜索"
+            android:hint="输入网站"
             android:imeOptions="actionDone"
             android:inputType="text"
             android:maxLines="1"
@@ -36,21 +36,21 @@
             android:layout_marginTop="10dp"
             android:layout_width="34dp"
             android:layout_height="34dp"
-            android:id="@+id/send_button"
+            android:id="@+id/video_ok_button"
             android:layout_marginRight="7dp"
-            android:background="@drawable/search_2"/>
+            android:background="@drawable/choose"/>
     </LinearLayout>
 
-<!--    地点搜索结果-->
+    <!--    地点搜索结果-->
     <LinearLayout
         android:id="@+id/rey_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/loc_rey"
+        <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
+            android:layout_marginTop="50dp"
+            android:id="@+id/player_list_video"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="60dp" />
+            android:layout_height="220dp" />
     </LinearLayout>
 </RelativeLayout>

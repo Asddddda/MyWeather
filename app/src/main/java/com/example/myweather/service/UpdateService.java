@@ -1,4 +1,4 @@
-package com.example.myweather.model.service;
+package com.example.myweather.service;
 
 import android.app.AlarmManager;
 import android.app.NotificationChannel;

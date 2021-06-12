@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import com.example.myweather.presenter.locationView.LocationAdapter;
+import com.example.myweather.locations.LocationAdapter;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,7 +18,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.myweather.presenter.locationView.Location;
+import com.example.myweather.locations.Location;
 import com.example.myweather.R;
 import com.example.myweather.util.JsonObject;
 import com.example.myweather.util.ThreadManager;

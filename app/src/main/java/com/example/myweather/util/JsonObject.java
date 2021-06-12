@@ -8,7 +8,7 @@ import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.myweather.presenter.locationView.Location;
+import com.example.myweather.locations.Location;
 
 import org.json.JSONArray;
 import org.json.JSONException;
